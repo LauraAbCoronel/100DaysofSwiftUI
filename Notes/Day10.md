@@ -118,7 +118,7 @@ struct App {
 * You can create your own initializer as long as all properties have a value by the time the initializer ends
 * The way to do it is like so:
 ``` swift
-ruct Player {
+struct Player {
   let name: String
   let number: Int
     
