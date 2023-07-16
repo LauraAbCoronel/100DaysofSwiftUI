@@ -1,4 +1,4 @@
-# Day 11: Classes
+# Day 12: Classes
 [Link](https://www.hackingwithswift.com/100/swiftui/12)
 
 ### How to create your own classes
