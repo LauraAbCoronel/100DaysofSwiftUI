@@ -210,4 +210,40 @@ struct Watermark: ViewModifier {
 * **TIP** Often folks wonder when it’s better to add a custom view modifier versus just adding a new method to View, and really it comes down to one main reason: custom view modifiers can have their own stored properties, whereas extensions to View cannot.
 
 ### Custom containers
+* Although it’s not something you’re likely to do often, I want to at least show you that it’s perfectly possible to create custom containers in your SwiftUI apps.
+* This is pretty Advanced
+* To try it out, we’re going to make a new type of stack called a GridStack, which will let us create any number of views inside a fixed grid.
+* The way you read this: `struct GridStack<Content: View>: View {` is: "there is a new struct called GridStack that conforms to the View protocol. You can provide any kind of content you like, but whatever it is it must conform to the View protocol."
+* Below is an example of a custom stack that creates a grid view from 1 view you pass to it
+``` swift
+struct GridStack<Content: View>: View {
+	let rows: Int
+	let columns: Int
+	@ViewBuilder let content: (Int, Int) -> Content
+	
+	var body: some View {
+		VStack {
+			ForEach(0..<rows, id: \.self) {row in
+				HStack {
+					ForEach(0..<columns, id: \.self) { column in
+						content(row, column)
+					}
+				}
+			}
+		}
+	}
+}
+```
+* Take particular note of the let content line – that defines a closure that must be able to accept two integers and return some sort of content we can show.
+* **Tip**: When looping over ranges, SwiftUI can use the range directly only if we know for sure the values in the range won’t change over time. Here we’re using `ForEach` with `0..<rows` and `0..<columns`, both of which are values that can change over time – we might add more rows, for example. In this situation, we need to add a second parameter to `ForEach`, `id: \.self`, to tell SwiftUI how it can identify each view in the loop. We’ll go into more detail on this in project 5.
+* And we call it like so 
+``` swift
+struct ContentView: View {
+    var body: some View {
+        GridStack(rows: 4, columns: 4) { row, col in
+            Text("R\(row) C\(col)")
+        }
+    }
+}
+```
 * 
