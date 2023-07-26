@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+struct TitleModifier:ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.largeTitle.bold())
+			.foregroundColor(.blue)
+	}
+}
+
+extension View {
+	func title() -> some View {
+		modifier(TitleModifier())
+	}
+}
+
 struct ContentView: View {
 	@State private var showingScore = false
 	@State private var showingFinalScore = false
@@ -46,10 +60,7 @@ struct ContentView: View {
 						Button {
 							flagTapped(number)
 						} label: {
-							Image(countries[number])
-								.renderingMode(.original)
-								.clipShape(Capsule())
-								.shadow(radius: 5)
+							FlagImage(name: countries[number])
 						}
 					}
 				}
