@@ -38,8 +38,8 @@ struct ContentView: View {
         NavigationView {
             Form {
                 Picker("Conversion", selection: $selectedUnits) {
-                    ForEach(0..<conversions.count) {
-                        Text(conversions[$0])
+					ForEach(conversions, id: \.self) {
+                        Text($0)
                     }
                 }
                 Section {
