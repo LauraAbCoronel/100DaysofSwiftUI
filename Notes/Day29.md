@@ -75,4 +75,63 @@ func loadFile() {
 ```
 
 ### Working with strings
-* 
+* iOS gives us some really powerful APIs for working with strings, including the ability to split them into an array, remove whitespace, and even check spellings.
+* In our game we'll be loading a file from our app bundle that contains over 10,000 eight-letter words, which we'll use to start the game.
+  * The words are stored by line so we would want to split them up in to an array of strings 
+* Swift gives us a method called `components(separatedBy:)` that can converts a single string into an array of strings by breaking it up wherever another string is found.
+* For example below separates the string `a b c` to `["a", "b", "c"]`
+``` swift
+let input = "a b c"
+let letters = input.components(separatedBy: " ")
+```
+* Below is an example of how to separate by line breaks:
+``` swift
+let input = """
+a
+b
+c
+"""
+let letters = input.components(separatedBy: "\n")
+```
+* Another useful string method is `trimmingCharacters(in:)`, which asks Swift to remove certain kinds of characters from the start and end of a string.
+  * This uses a new type called `CharacterSet`, but most of the time we want one particular behavior: removing whitespace and new lines – this refers to spaces, tabs, and line breaks, all at once.
+  * Example: `let trimmed = letter.trimmingCharacters(in: .whitespacesAndNewlines)` where letter contains a string
+* The last functionality we'll cover is the ability to check for misspelled words. 
+  * This functionality is provided through the class `UITextChecker`
+* the “UI” part of that name carries two additional meanings with it:
+  1. This class comes from UIKit. That doesn’t mean we’re loading all the old user interface framework, though; we actually get it automatically through SwiftUI.
+  2. It’s written using Apple’s older language, Objective-C. We don’t need to write Objective-C to use it, but there is a slightly unwieldy API for Swift users.
+* There are four steps to check for a misspelled word
+1. Create a word to check to check and an instance of `UITextChecker` that we can use to check that string
+``` swift
+let word = "swift"
+let checker = UITextChecker()
+```
+2. Tell checker how much of our string we want to check
+  * There’s a catch: Swift uses a very clever, very advanced way of working with strings, which allows it to use complex characters such as emoji in exactly the same way that it uses the English alphabet. **Objective-C does *not*** Which means we need to ask Swift to create an Objective-C string range using the entire length of all our characters, like this: 
+``` swift
+let range = NSRange(location: 0, length: word.utf16.count) // this says I'm making a range that start at 0 and ends at the length of the string
+```
+  * UTF-16 is what’s called a character encoding – a way of storing letters in a string. We use it here so that Objective-C can understand how Swift’s strings are stored; it’s a nice bridging format for us to connect the two.
+3. we can ask our text checker to report where it found any misspellings in our word, passing in that range to check, and what language
+``` swift
+let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+// in is the string we want to check, range is well the range (step 2), starting at: Where should we start in the string, wrap: Should we wrap back to the beginning, language: What language to spell check in
+```
+  * If it could not find a value we will get NSNotFound returned to us. So to check if there were no spelling errors we can do this:
+``` swift
+let allGood = misspelledRange.location == NSNotFound
+```
+
+* PUT IT ALL TOGETHER
+``` swift
+func spellCheckWord() {
+  let word = "swift"
+  let checker = UITextChecker()
+  
+  let range = NSRange(location: 0, length: word.utf16.count)
+  let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+  
+  let allGood = misspelledRange.location == NSNotFound
+}
+```

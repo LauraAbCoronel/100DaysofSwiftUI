@@ -12,6 +12,7 @@
 		4E03F7472A77692F00892692 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E03F7462A77692F00892692 /* Assets.xcassets */; };
 		4E03F74A2A77692F00892692 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E03F7492A77692F00892692 /* Preview Assets.xcassets */; };
 		4E03F7512A77707D00892692 /* LoadingResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E03F7502A77707D00892692 /* LoadingResources.swift */; };
+		4E03F7532A77739B00892692 /* WorkingWithStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E03F7522A77739B00892692 /* WorkingWithStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		4E03F7462A77692F00892692 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E03F7492A77692F00892692 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4E03F7502A77707D00892692 /* LoadingResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingResources.swift; sourceTree = "<group>"; };
+		4E03F7522A77739B00892692 /* WorkingWithStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingWithStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +40,7 @@
 			isa = PBXGroup;
 			children = (
 				4E03F7502A77707D00892692 /* LoadingResources.swift */,
+				4E03F7522A77739B00892692 /* WorkingWithStrings.swift */,
 				4E03F7412A77692C00892692 /* Day29 */,
 				4E03F7402A77692C00892692 /* Products */,
 			);
@@ -142,6 +145,7 @@
 			files = (
 				4E03F7452A77692C00892692 /* ListIntro.swift in Sources */,
 				4E03F7512A77707D00892692 /* LoadingResources.swift in Sources */,
+				4E03F7532A77739B00892692 /* WorkingWithStrings.swift in Sources */,
 				4E03F7432A77692C00892692 /* Day29App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
