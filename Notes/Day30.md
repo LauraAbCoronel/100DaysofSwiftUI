@@ -17,7 +17,23 @@ withAnimation {
 * Oh we also added an SF symbol so that when we display the usedWords a circle with the number of character shows up next to each word. 
 
 ### Running code when our app launches
-* 
+* This video focused on imported our text file with a list of a bunch of 8 letter words
+* We learned about `fatalError()`. You call this when an error has a occurred that prevents your app from running. So in our case if they could not find the file in the bundle or the file was corrupt.
+* So we made a function to run when the app starts by using the `.onAppear()` modifier 
+* And here is how our function looks:
+``` swift
+func startGame() {
+  if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
+    if let startWords = try? String(contentsOf: startWordsURL) {
+      let allWords = startWords.components(separatedBy: "\n")
+      rootWord = allWords.randomElement() ?? "silkworm"
+      return
+    }
+  }
+  
+  fatalError("Could not load start.txt from bundle.")
+}
+```
 
 ### Validating words with UITextChecker
 * 
