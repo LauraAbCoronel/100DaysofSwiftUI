@@ -36,4 +36,9 @@ func startGame() {
 ```
 
 ### Validating words with UITextChecker
-* 
+* We added 4 more functions to help us with word validation.
+1. check if they already didn't try this word
+2. if the letters in the word they try appear in the root word
+3. check if the word is an actual word with spellchecker 
+4. change the alerts title and message depending on the title and message string provided. 
+* Then we just added them all tho the `addNewWord()` function using `guard`s
