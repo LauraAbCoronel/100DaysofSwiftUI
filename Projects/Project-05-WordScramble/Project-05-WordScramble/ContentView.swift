@@ -11,6 +11,7 @@ struct ContentView: View {
 	@State private var usedWords = [String]()
 	@State private var rootWord = ""
 	@State private var newWord = ""
+	@State private var score = 0
 	
 	@State private var errorTitle = ""
 	@State private var errorMessage = ""
@@ -41,12 +42,32 @@ struct ContentView: View {
 			} message: {
 				Text(errorMessage)
 			}
+			.toolbar{
+				Button("New Game", action: startGame)
+			}
+			.safeAreaInset(edge: .bottom) {
+				Text("Score: \(score)")
+					.frame(maxWidth: .infinity)
+					.padding()
+					.background(.blue)
+					.foregroundStyle(.white)
+					.font(.title)
+			}
 		}
+		
     }
 	
 	func addNewWord() {
 		let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-		guard answer.count > 0 else { return }
+		guard answer.count > 2 else {
+			wordError(title: "Word too short", message: "Words must be longer than 2 letters")
+			return
+		}
+		
+		guard answer == rootWord else {
+			wordError(title: "Nice try...", message: "You can't use your starting word!")
+			return
+		}
 		
 		// Extra validation
 		guard isOriginal(word: answer) else {
@@ -67,10 +88,16 @@ struct ContentView: View {
 		withAnimation {
 			usedWords.insert(answer, at: 0)
 		}
+		
+		score += answer.count
 		newWord = ""
 	}
 	
 	func startGame() {
+		newWord = ""
+		usedWords.removeAll()
+		score = 0
+		
 		if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
 			if let startWords = try? String(contentsOf: startWordsURL) {
 				let allWords = startWords.components(separatedBy: "\n")
