@@ -22,13 +22,14 @@
 import SwiftUI
 
 struct ContentView: View {
-	@State private var computerChoice: String = choices.randomElement() ?? "Rock"
-	@State private var condition: String = conditions.randomElement() ?? "Lose"
-	@State private var score: Int = 0
+	@State private var computerChoice = Int.random(in: 0..<3)
+	@State private var shouldWin = Bool.random()
+	
+	@State private var score = 0
 	@State private var showingFinalScore = false
 	@State private var questionCounter = 1
 	
-	static let choices = ["Rock", "Paper", "Scissor"]
+	let choices = ["Rock", "Paper", "Scissor"]
 	static let conditions = ["Win", "Lose"]
 	
     var body: some View {
@@ -42,8 +43,8 @@ struct ContentView: View {
 			endPoint: UnitPoint(x: 0.5, y: 1)
 			)
 			.ignoresSafeArea()
-			VStack {
-				Spacer()
+
+			VStack(spacing: 30) {
 				
 				HStack {
 					Text("Rock, Paper, Scissors")
@@ -52,27 +53,24 @@ struct ContentView: View {
 				}
 				
 				Spacer()
-				Spacer()
 				
-				Text(condition == "Win" ? "Win against \(computerChoice)" : "Lose to \(computerChoice)")
+				Text(shouldWin ? "Win against \(choices[computerChoice])" : "Lose to \(choices[computerChoice])")
 				.font(.title)
 				.frame(maxWidth: .infinity)
 				.padding(.vertical, 40)
 				.background(.regularMaterial)
 				.clipShape(RoundedRectangle(cornerRadius: 20))
 				
-				Spacer()
-				
 				VStack(spacing: 20) {
 					Text("Select your move")
 						.foregroundStyle(.primary)
-					ForEach(Self.choices, id: \.self) { choice in
+					ForEach(0..<3) { choice in
 						Button {
 							checkAnswer(answer: choice)
 						} label: {
 							HStack {
-								Image(choice)
-								Text(choice)
+								Image(choices[choice])
+								Text(choices[choice])
 									.foregroundColor(.primary)
 							}
 							.frame(maxWidth: 200)
@@ -84,7 +82,6 @@ struct ContentView: View {
 				}
 				
 				Spacer()
-				Spacer()
 				
 				ProgressView(value: Double(questionCounter), total: 10.0)
 					.tint(Color(red: 1, green: 0.9, blue: 0))
@@ -92,36 +89,30 @@ struct ContentView: View {
 			}
 			.padding()
 			.alert("Final Score", isPresented: $showingFinalScore) {
-				Button("Play again", action: resetGame)
+				Button("Play Again", action: resetGame)
 			} message: {
-				Text("Your score is \(score)")
+				Text("Your score was \(score)")
 			}
 		}
     }
 	
-	func checkAnswer(answer: String) -> Void {
-		switch computerChoice {
-		case "Rock":
-			if (answer == "Paper" && condition == "Win") || (answer == "Scissor" && condition == "Lose") {
-				score += 1
-			} else {
-				score -= 1
-			}
-		case "Paper":
-			if (answer == "Scissor" && condition == "Win") || (answer == "Rock" && condition == "Lose") {
-				score += 1
-			} else {
-				score -= 1
-			}
-		case "Scissor":
-			if (answer == "Rock" && condition == "Win") || (answer == "Paper" && condition == "Lose") {
-				score += 1
-			} else {
-				score -= 1
-			}
-		default:
-			print("Something went wrong")
+	func checkAnswer(answer: Int) {
+		let winningMoves = [1, 2, 0]
+		let losingMoves = [2, 0, 1]
+		let didWin: Bool
+		
+		if shouldWin {
+			didWin = answer == winningMoves[computerChoice]
+		} else {
+			didWin = answer == losingMoves[computerChoice]
 		}
+		
+		if didWin {
+			score += 1
+		} else {
+			score -= 1
+		}
+		
 		if questionCounter < 10 {
 			nextQuestion()
 		} else {
@@ -134,13 +125,8 @@ struct ContentView: View {
 			questionCounter += 1
 		}
 		
-		computerChoice = Self.choices.randomElement() ?? "Rock"
-		
-		if condition == "Win" {
-			condition = "Lose"
-		} else {
-			condition = "Win"
-		}
+		computerChoice = Int.random(in: 1..<3)
+		shouldWin.toggle()
 	}
 	
 	func resetGame() {
