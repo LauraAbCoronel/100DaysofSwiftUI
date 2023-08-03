@@ -11,6 +11,7 @@
 		4E5C23D22A7B2D770067696A /* ImplicitAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C23D12A7B2D770067696A /* ImplicitAnimations.swift */; };
 		4E5C23D42A7B2D7B0067696A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E5C23D32A7B2D7B0067696A /* Assets.xcassets */; };
 		4E5C23D72A7B2D7B0067696A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E5C23D62A7B2D7B0067696A /* Preview Assets.xcassets */; };
+		4E5C23DE2A7B34120067696A /* CustomizingAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C23DD2A7B34120067696A /* CustomizingAnimations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		4E5C23D12A7B2D770067696A /* ImplicitAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImplicitAnimations.swift; sourceTree = "<group>"; };
 		4E5C23D32A7B2D7B0067696A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E5C23D62A7B2D7B0067696A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4E5C23DD2A7B34120067696A /* CustomizingAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizingAnimations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				4E5C23CF2A7B2D770067696A /* Day32_AnimationsApp.swift */,
 				4E5C23D12A7B2D770067696A /* ImplicitAnimations.swift */,
+				4E5C23DD2A7B34120067696A /* CustomizingAnimations.swift */,
 				4E5C23D32A7B2D7B0067696A /* Assets.xcassets */,
 				4E5C23D52A7B2D7B0067696A /* Preview Content */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E5C23DE2A7B34120067696A /* CustomizingAnimations.swift in Sources */,
 				4E5C23D22A7B2D770067696A /* ImplicitAnimations.swift in Sources */,
 				4E5C23D02A7B2D770067696A /* Day32_AnimationsApp.swift in Sources */,
 			);
