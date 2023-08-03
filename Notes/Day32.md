@@ -143,4 +143,35 @@ Stepper(
 * In the former, the state change has no idea it will trigger an animation, and in the latter the view has no idea it will be animated – both work and both are important.
 
 #### Creating explicit animations
-* 
+* You’ve seen how SwiftUI lets us create implicit animations by attaching the animation() modifier to a view, and how it also lets us create animated binding changes by adding the animation() modifier to a binding, but there’s a third useful way we can create animations
+* explicitly asking SwiftUI to animate changes occurring as the result of a state change.
+* Now, though, we’re being explicit that we want an animation to occur when some arbitrary state change occurs: it’s not attached to a binding, and it’s not attached to a view, it’s just us explicitly asking for a particular animation to occur because of a state change.
+* We're going to make the button have a 3D spin effect when it's tapped. 
+  * We're going to use the `rotation3DEffect()` modifier to do so. 
+* if we use a withAnimation() closure then SwiftUI will ensure any changes resulting from the new state will automatically be animated. So this is how it would look
+``` swift
+struct ExplicitAnimations: View {
+	@State private var animationAmount = 0.0
+	
+    var body: some View {
+		Button("Tap Me") {
+			withAnimation {
+				animationAmount += 360
+			}
+		}
+		.padding(50)
+		.background(.red)
+		.foregroundStyle(.white)
+		.clipShape(Circle())
+		.rotation3DEffect(
+			.degrees(animationAmount), axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
+		)
+    }
+}
+```
+* And if we want to customize the explicit animation we do so like this:
+``` swift
+withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
+  animationAmount += 360
+}
+```
