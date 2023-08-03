@@ -96,7 +96,51 @@ struct CustomizingAnimations: View {
 ```
 
 #### Animating bindings
-* 
+* The animation() modifier can be applied to any SwiftUI binding, which causes the value to animate between its current and new value.
+* So we added a `Stepper` that adjusted the `animationAmount` state but also included an `animation` modifier to it
+``` swift
+struct AnimationBindings: View {
+	@State private var animationAmount = 1.0
+	
+    var body: some View {
+		VStack {
+			Stepper(
+				"Scale amount",
+				value: $animationAmount
+					.animation(),
+				in: 1...10
+			)
+			
+			Spacer()
+			
+			Button("Tap Me") {
+				animationAmount += 1
+			}
+			.padding(40)
+			.background(.red)
+			.foregroundStyle(.white)
+			.clipShape(Circle())
+			.scaleEffect(animationAmount)
+		}
+    }
+}
+```
+* We can also add modifier to the binding `animation` modifier like we did in the last video like so:
+``` swift
+Stepper(
+  "Scale amount",
+  value: $animationAmount
+    .animation(
+      .easeInOut(duration: 1)
+      .repeatCount(3, autoreverses: true)
+    ),
+  in: 1...10
+)
+```
+* These binding animations effectively turn the tables on implicit animations: 
+  * rather than setting the animation on a view and implicitly animating it with a state change, 
+  * we now set nothing on the view and explicitly animate it with a state change. 
+* In the former, the state change has no idea it will trigger an animation, and in the latter the view has no idea it will be animated – both work and both are important.
 
 #### Creating explicit animations
 * 
