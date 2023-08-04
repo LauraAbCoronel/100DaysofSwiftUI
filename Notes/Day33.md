@@ -125,4 +125,32 @@ VStack {
 
 
 ### Building custom transitions using View Modifier
-* git 
+* It’s possible – and actually surprisingly easy – to create wholly new transitions for SwiftUI, allowing us to add and remove views using entirely custom animations.
+* The catch is that we need to be able to instantiate the modifier, which means it needs to be one we create ourselves.
+* First we created a custom transition right under our SwiftUI import statement
+``` swift
+struct CornerRotateModifier: ViewModifier {
+    let amount: Double
+    let anchor: UnitPoint
+
+    func body(content: Content) -> some View {
+        content
+            .rotationEffect(.degrees(amount), anchor: anchor)
+            .clipped()
+    }
+}
+```
+* This does the rotation effect of a content. We also added clipped so it doesn't show outside of it's view bound 
+* We then added this to the `AnyTransition` type with an extension like so:
+``` swift
+extension AnyTransition {
+    static var pivot: AnyTransition {
+        .modifier(
+            active: CornerRotateModifier(amount: -90, anchor: .topLeading), // start
+            identity: CornerRotateModifier(amount: 0, anchor: .topLeading) // end
+        )
+    }
+}
+```
+* This will rotate it from -90 to 0 on it's top leading corner
+* We can now call it with `.transition(.pivot)`
