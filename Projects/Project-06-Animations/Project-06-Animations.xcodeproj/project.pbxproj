@@ -11,6 +11,7 @@
 		4E5C23F22A7C93460067696A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C23F12A7C93460067696A /* ContentView.swift */; };
 		4E5C23F42A7C934A0067696A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E5C23F32A7C934A0067696A /* Assets.xcassets */; };
 		4E5C23F72A7C934A0067696A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E5C23F62A7C934A0067696A /* Preview Assets.xcassets */; };
+		4E5C23FE2A7C964B0067696A /* AnimatingGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C23FD2A7C964B0067696A /* AnimatingGestures.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		4E5C23F12A7C93460067696A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4E5C23F32A7C934A0067696A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E5C23F62A7C934A0067696A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4E5C23FD2A7C964B0067696A /* AnimatingGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatingGestures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				4E5C23EF2A7C93460067696A /* Project_06_AnimationsApp.swift */,
 				4E5C23F12A7C93460067696A /* ContentView.swift */,
+				4E5C23FD2A7C964B0067696A /* AnimatingGestures.swift */,
 				4E5C23F32A7C934A0067696A /* Assets.xcassets */,
 				4E5C23F52A7C934A0067696A /* Preview Content */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E5C23FE2A7C964B0067696A /* AnimatingGestures.swift in Sources */,
 				4E5C23F22A7C93460067696A /* ContentView.swift in Sources */,
 				4E5C23F02A7C93460067696A /* Project_06_AnimationsApp.swift in Sources */,
 			);
