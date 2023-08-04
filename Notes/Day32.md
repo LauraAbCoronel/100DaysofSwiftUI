@@ -1,13 +1,13 @@
 # Day 32: Project 6, part 1
 [Link](https://www.hackingwithswift.com/100/swiftui/32)
 
-#### Animation: Introduction
+### Animation: Introduction
 * There are a few reasons to use Animations:
   1. It makes our UI look better
   2. Help users understand what's going on with our program
 * We're going to look at a range of animations and transitions with SwiftUI
 
-#### Creating implicit animations
+### Creating implicit animations
 * In SwiftUI, the simplest type of animation is an *implicit* one
   * we tell our views ahead of time “if someone wants to animate you, here’s how you should respond”, and nothing more. 
 * Our first effect is a button to get bigger and bigger the more you click on it
@@ -35,7 +35,7 @@ struct ContentView: View {
   * For example we'll add a `blur` modifier to the button before the `animation` modifier.
 * The point is that nowhere have we said what each frame of the animation should look like, and we haven’t even said when SwiftUI should start and finish the animation. Instead, our animation becomes a function of our state just like the views themselves.
 
-#### Customizing animations in SwiftUI
+### Customizing animations in SwiftUI
 * The point is that nowhere have we said what each frame of the animation should look like, and we haven’t even said when SwiftUI should start and finish the animation. Instead, our animation becomes a function of our state just like the views themselves.
 * Implicit animations always need to watch a particular value 
   * Otherwise animations would be triggered for every small change – even rotating the device from portrait to landscape would trigger the animation, which would look strange.
@@ -95,7 +95,7 @@ struct CustomizingAnimations: View {
 }
 ```
 
-#### Animating bindings
+### Animating bindings
 * The animation() modifier can be applied to any SwiftUI binding, which causes the value to animate between its current and new value.
 * So we added a `Stepper` that adjusted the `animationAmount` state but also included an `animation` modifier to it
 ``` swift
@@ -142,7 +142,7 @@ Stepper(
   * we now set nothing on the view and explicitly animate it with a state change. 
 * In the former, the state change has no idea it will trigger an animation, and in the latter the view has no idea it will be animated – both work and both are important.
 
-#### Creating explicit animations
+### Creating explicit animations
 * You’ve seen how SwiftUI lets us create implicit animations by attaching the animation() modifier to a view, and how it also lets us create animated binding changes by adding the animation() modifier to a binding, but there’s a third useful way we can create animations
 * explicitly asking SwiftUI to animate changes occurring as the result of a state change.
 * Now, though, we’re being explicit that we want an animation to occur when some arbitrary state change occurs: it’s not attached to a binding, and it’s not attached to a view, it’s just us explicitly asking for a particular animation to occur because of a state change.

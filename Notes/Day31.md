@@ -1,7 +1,7 @@
 # Day 31: Project 5, part 3
 [Link](https://www.hackingwithswift.com/100/swiftui/31)
 
-#### Challenge
+### Challenge
 1. Disallow answers that are shorter than three letters or are just our start word
 * I added a new function that checks the length of the answer is longer than 3 characters.
 * I also included an if statement to the `isOriginal` function to check if the word matches the root word
