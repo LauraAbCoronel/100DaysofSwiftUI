@@ -95,7 +95,34 @@ HStack(spacing: 0) {
 ```
 
 ### Showing and hiding views with transitions
-* 
+* One of the most powerful features of SwiftUI is the ability to customize the way views are shown and hidden.
+* Transitions control how this insertion and removal takes place, and we can work with the built-in transitions, combine them in different ways, or even create wholly custom transitions.
+* Do demonstrate this we're gonna make a button and when you tap on it a red square will appear and disappear.
+We could by just adding an explicit animation like so:
+``` swift
+VStack {
+  Button("Tap Me") {
+    withAnimation {
+      isShowingRed.toggle()
+    }
+  }
+  
+  if isShowingRed {
+    Rectangle()
+      .fill(.red)
+      .frame(width: 200, height: 200)
+  }
+}
+```
+* To make it even better we can add a transition to the `Rectangle` View, like so:
+  * `.transition(.scale)`
+  * This has the red rectangle scale up and down when appearing and disappearing
+* There's a bunch of other transitions we can use, for example we could use `asymmetric` like so:
+``` swift
+.transition(.asymmetric(insertion: .scale, removal: .opacity))
+```
+* This allows you to use two different effects. So when the view is inserted it uses the `.scale` effect and when it disappears it uses the `.opacity` effect
+
 
 ### Building custom transitions using View Modifier
 * git 
