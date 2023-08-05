@@ -31,6 +31,8 @@ struct ContentView: View {
 	@State private var countries = allCountries.shuffled()
 	@State private var correctAnswer = Int.random(in: 0...2)
 	
+	@State private var selectedFlag = -1
+	
 	static let allCountries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"]
 	
 	var body: some View {
@@ -61,7 +63,17 @@ struct ContentView: View {
 							flagTapped(number)
 						} label: {
 							FlagImage(name: countries[number])
+								.rotation3DEffect(
+									.degrees(selectedFlag == number ? 360 : 0),
+									axis: (x: 0.0, y: 1.0, z: 0.0)
+								)
+								.opacity((selectedFlag == -1 || selectedFlag == number) ? 1 : 0.25)
+								.scaleEffect((selectedFlag == -1 || selectedFlag == number) ? 1 : 0.75)
+								.saturation((selectedFlag == -1 || selectedFlag == number) ? 1 : 0)
+								.animation(.default, value: selectedFlag)
+								
 						}
+						
 					}
 				}
 				.frame(maxWidth: .infinity)
@@ -91,6 +103,8 @@ struct ContentView: View {
 	}
 	
 	func flagTapped(_ number:Int) {
+		selectedFlag = number
+
 		if number == correctAnswer {
 			scoreTitle = "Correct"
 			score += 1
@@ -117,6 +131,7 @@ struct ContentView: View {
 		questionCounter += 1
 		countries.shuffle()
 		correctAnswer = Int.random(in: 0...2)
+		selectedFlag = -1
 	}
 	
 	func restartGame() {
