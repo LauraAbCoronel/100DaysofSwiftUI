@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct QuestionGeneratorView: View {
-	@State private var practiceNumber = 2
-	@State private var numOfQuestions = 0 // 0 is 5, 1 is 10 and 2 is 15
+	@Binding var practiceNumber: Int
+	@Binding var numOfQuestions: Int // 0 is 5, 1 is 10 and 2 is 15
 	
 	@Binding var isPlaying: Bool
 	@Binding var questions: [String]
@@ -35,6 +35,7 @@ struct QuestionGeneratorView: View {
 	func generateQnA() {
 		questions.removeAll()
 		answers.removeAll()
+		choices.removeAll()
 		
 		for _ in 1...(numOfQuestions * 5 + 5) {
 			let rand1 = Int.random(in: 1...practiceNumber)
@@ -52,5 +53,5 @@ struct QuestionGeneratorView: View {
 }
 
 #Preview {
-	QuestionGeneratorView(isPlaying: .constant(false), questions: .constant(["1 X 1"]), answers: .constant([1]), choices: .constant([[1,2,3]]))
+	QuestionGeneratorView(practiceNumber: .constant(5), numOfQuestions: .constant(0), isPlaying: .constant(false), questions: .constant(["2 X 4", "3 X 1", "4 X 1", "5 X 2", "4 X 5"]), answers: .constant([8, 3, 4, 10, 20]), choices: .constant([[8, 4, 12], [3, 0, 6], [4, 0, 8], [10, 5, 15], [20, 15, 25]]))
 }
