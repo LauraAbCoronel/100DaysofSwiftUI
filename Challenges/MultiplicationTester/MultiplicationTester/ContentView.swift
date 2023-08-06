@@ -18,13 +18,33 @@ struct ContentView: View {
 	
     var body: some View {
 		if !isPlaying {
-			QuestionGeneratorView(practiceNumber: $practiceNumber, numOfQuestions: $numOfQuestions, isPlaying: $isPlaying, questions: $questions, answers: $answers, choices: $choices)
+			QuestionGeneratorView(practiceNumber: $practiceNumber, numOfQuestions: $numOfQuestions, isPlaying: $isPlaying, generateQnA: generateQnA)
 		} else {
-			GameView(practiceNumber: $practiceNumber, numOfQuestions: $numOfQuestions, isPlaying: $isPlaying, questions: $questions, answers: $answers, choices: $choices)
+			GameView(isPlaying: $isPlaying, questions: $questions, answers: $answers, choices: $choices, generateQnA: generateQnA)
 		}
     }
+	
+	func generateQnA() {
+		questions.removeAll()
+		answers.removeAll()
+		choices.removeAll()
+		
+		for _ in 1...(numOfQuestions * 5 + 5) {
+			let rand1 = Int.random(in: 1...practiceNumber)
+			let rand2 = Int.random(in: 1...practiceNumber)
+			
+			let larger = max(rand1, rand2)
+			let answer = rand1 * rand2
+			
+			questions.append("\(rand1) X \(rand2)")
+			answers.append(answer)
+			choices.append([answer - larger, answer, answer + larger].shuffled())
+		}
+		isPlaying = true
+	}
 }
 
 #Preview {
     ContentView()
 }
+
