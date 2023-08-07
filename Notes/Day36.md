@@ -38,7 +38,32 @@ struct ContentView: View {
 * This is because User is a class now and with classes whenever we call a class we get the reference to the class not the class itself. So changing values in the class does NOT change the reference  
 
 ### Sharing SwiftUI state with @StateObject
-* 
+* If you want to use a class with your SwiftUI data – which you will want to do if that data should be shared across more than one view – then SwiftUI gives us three property wrappers that are useful: `@StateObject`, `@ObservedObject`, and `@EnvironmentObject`.
+* In this video we're solving the issue we had in the previous video where the view wouldn't update when we updated data in a class
+  * To fix this, we need to tell SwiftUI when interesting parts/variables of our class have changed. 
+* We can do this with `@Published` if we add that tag to the front of the class variables it will tell Swift that whenever this property changes, it should send an announcement and reload any view. 
+``` swift
+class User {
+	@Published var firstName = "Bilbo"
+	@Published var lastName = "Baggins"
+}
+``` 
+* But for views to know that it should expect a `@Published` notification we must tag the User variable with `@StateObject` not `@State`.
+  * You can remove the `private` keyword here. It depends on your usage - if you're intending to share that object with other views then remove the `private`
+`@StateObject var user = User()`
+* But the above throws an error stating that `User` must conform to `ObservableObject`. So all we do is add that type to `User` like so
+``` swift
+class User: ObservableObject {
+	@Published var firstName = "Bilbo"
+	@Published var lastName = "Baggins"
+}
+```
+* As you've seen, rather than just using @State to declare local state, we now take three steps:
+  1. Make a class that conforms to the `ObservableObject` protocol.
+  2. Mark some properties with `@Published` so that any views using the class gets updated when they change
+  3. Create an instance of our class using the `@StateObject` property wrapper.
+* However, there is a catch. Like I said earlier, `@StateObject` tells SwiftUI that we’re creating a new class instance that should be watched for any change announcements, **but** that should only be used when you’re creating the object like we are with our `User` instance.
+* When creating the shared data use @StateObject, but when you’re just using it in a different view you should use @ObservedObject instead.
 
 ### Showing and hiding views
 * 
