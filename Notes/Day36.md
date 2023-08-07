@@ -66,6 +66,35 @@ class User: ObservableObject {
 * When creating the shared data use @StateObject, but when you’re just using it in a different view you should use @ObservedObject instead.
 
 ### Showing and hiding views
+* There are several ways of showing views in SwiftUI, and one of the most basic is a sheet: a new view presented on top of our existing one.
+* Sheets work much like alerts, we define the conditions under which a sheet should be shown, and when those conditions become true or false the sheet will either be presented or dismissed respectively.
+* Showing the sheet requires 4 steps:
+  1. Create state to track whether the sheet is showing
+    * `@State private var showingSheet = false`
+  2. Toggle when our button is tapped
+    * `showingSheet.toggle()`
+  3. Attach the sheet somewhere in our view hierarchy.
+    ``` swift
+    .sheet(isPresented: $showingSheet) {
+			SecondView() // step 4
+		}
+    ```
+  4. Decide what to show on the sheet
+* Now it works when we click the button. And to dismiss the sheet we can drag it down.
+* But there will be a time where we want to dismiss it programmatically. We can do this with another property wrapper, `@Environment`.
+  * This allows us to create properties that store values provided to us externally
+    * Basically saying: "Figure out how my view was presented, then dismiss it appropriately"
+```swift
+struct SecondView: View {
+	@Environment(\.dismiss) var dismiss
+	let name: String
+	var body: some View {
+		Button("Dismiss") {
+			dismiss()
+		}
+	}
+}
+```
 * 
 
 ### Deleting items using onDelete()
