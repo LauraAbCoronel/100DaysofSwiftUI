@@ -99,10 +99,73 @@ struct SecondView: View {
 ### Deleting items using onDelete()
 * SwiftUI gives us the onDelete() modifier for us to use to control how objects should be deleted from a collection.
   * This is almost exclusively used with List and ForEach: we create a list of rows that are shown using ForEach, then attach onDelete() to that ForEach so the user can remove rows they don’t want.
-* 
+* The `onDelete()` modifier only exists on `ForEach`, so if we want users to delete items from a list we must put the items inside a `ForEach`
+* In order to make `onDelete()` work, we need to implement a method that will receive a single parameter of type `IndexSet`.
+  * `IndexSet` is similar to a set of integers, except it's sorted and it's just telling us the positions of all the items in the `ForEach` that should be removed.
+```swift
+func removeRows(at offsets: IndexSet) {
+    numbers.remove(atOffsets: offsets)
+} 
+```
+* We tell SwiftUI to call that method when it wants to delete data from the `ForEach`, like this:
+```swift
+ForEach(numbers, id: \.self) {
+    Text("Row \($0)")
+}
+.onDelete(perform: removeRows)
+```
+* Now with this code above if we swipe left on the row a delete button appears and we can delete the item.
+  * We could also swipe left across the entire screen and that deletes it too
+* But there's a way we can allow users to delete multiple rows easily.
+* So we wrapped our entire view in a `NavigationStack` then at the end of the `VStack` we added a navigation style and a `toolbar` that contains an `EditButton()`
+```swift
+.navigationTitle("onDelete()")
+.toolbar {
+  EditButton()
+}
+```
 
 ### Storing user settings with UserDefaults
-* 
+* Most users pretty much expect apps to store their data so they can create more customized experiences, and as such it’s no surprise that iOS gives us several ways to read and write user data.
+* One common way to store a small amount of data is called `UserDefaults`, and it’s great for simple user preferences.
+  * Everything you store in `UserDefaults` will automatically be loaded when your app launches
+  * You shouldn't store more than 512 KB
+* UserDefaults is perfect for storing things like when the user last launched the app, which news story they last read, or other passively collected information.
+* SwiftUI can often wrap up `UserDefaults` inside a nice and simple property wrapper called `@AppStorage` – it only supports a subset of functionality right now, but it can be really helpful.
+* We created a button that increases the tap count each time it's clicked
+  * To save the tap count we need to write to `UserDefaults` letting it know of the value
+  `UserDefaults.standard.set(tapCount, forKey: "Tap")`
+* In that line of code you can see 3 things in action:
+  1. We need to use `UserDefaults.standard`. This is the built-in instance of `UserDefaults` that is attached to our app, but in more advanced apps you can create your own instances.
+  2. There is a single `set()` method that accepts any kind of data – integers, Booleans, strings, and more.
+  3. We attach a string name to this data, in our case it’s the key “Tap”. 
+    * This key is case-sensitive, just like regular Swift strings, and it’s important – we need to use the same key to read the data back out of UserDefaults.
+* So now instead of setting the default to zero we can set it to the UserDefault like this:
+`UserDefaults.standard.integer(forKey: "Tap")`
+* Now when we run our simulator and tap the button and run the app again the same number appears
+* If the key can’t be found it just sends back 0.
+* They don’t write updates immediately because you might make several back to back, so instead they wait some time then write out all the changes at once. 
+* SwiftUI provides an @AppStorage property wrapper around UserDefaults, and in simple situations like this one it’s really helpful.
+  * What it does is let us effectively ignore UserDefaults entirely, and just use @AppStorage rather than @State, like this:
+```swift
+struct ContentView: View {
+    @AppStorage("tapCount") private var tapCount = 0
+
+    var body: some View {
+        Button("Tap count: \(tapCount)") {
+            tapCount += 1
+        }
+    }
+}
+```
+* Three things to notice:
+  1. Our access to the UserDefaults system is through the @AppStorage property wrapper.
+  2. We attach a string name, which is the UserDefaults key where we want to store the data. 
+    * We used "tapCount" but it doesn't need to match the property
+  3. The rest of the property is declared as normal, including providing a default value of 0. 
+    * That will be used if there is no existing value saved inside UserDefaults.
+* Clearly using `@AppStorage` is easier than `UserDefaults`
+  * However, right now at least `@AppStorage` doesn’t make it easy to handle storing complex objects such as Swift structs – perhaps because Apple wants us to remember that storing lots of data in there is a bad idea!
 
 ### Archiving Swift objects with Codable
 * 
