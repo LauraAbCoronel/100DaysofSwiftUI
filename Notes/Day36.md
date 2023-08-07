@@ -95,9 +95,10 @@ struct SecondView: View {
 	}
 }
 ```
-* 
 
 ### Deleting items using onDelete()
+* SwiftUI gives us the onDelete() modifier for us to use to control how objects should be deleted from a collection.
+  * This is almost exclusively used with List and ForEach: we create a list of rows that are shown using ForEach, then attach onDelete() to that ForEach so the user can remove rows they don’t want.
 * 
 
 ### Storing user settings with UserDefaults
