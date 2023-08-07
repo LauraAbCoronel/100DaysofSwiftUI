@@ -168,4 +168,31 @@ struct ContentView: View {
   * However, right now at least `@AppStorage` doesn’t make it easy to handle storing complex objects such as Swift structs – perhaps because Apple wants us to remember that storing lots of data in there is a bad idea!
 
 ### Archiving Swift objects with Codable
-* 
+* `@AppStorage` is great for storing simple settings such as integers and Booleans, but when it comes to complex data – custom Swift types, for example – we need to do a little more work.
+* When working with structs, Swift gives us a protocol called `Codable`
+  * `Codeable` - A protocol specifically for archiving and unarchiving data (Basically converting objects into plain text and back again)
+* When working with a type that only has simple properties – strings, integers, Booleans, arrays of strings, and so on – the only thing we need to do to support archiving and unarchiving is add a conformance to Codable, like this:
+```swift
+struct User: Codable {
+  let firstName: String
+  let lastName: String
+}
+```
+* Swift will automatically generate some code for us that will archive and unarchive User instances for us as needed, **but** we still need to tell Swift when to archive and what to do with the data.
+  * This part of the process is powered by a new type called `JSONEncoder`.
+    * It's job is to take something that conforms to `Codeable` and send back that object in JavaScript Object Notation (JSON)
+* The `Codable` protocol doesn’t require that we use JSON, and in fact other formats are available, but it is by far the most common.
+* To convert our `user` data into JSON data, we need to call the `encode()` method on a `JSONEncoder`.
+  * This might throw errors
+```swift
+Button("Save User") {
+  let encoder = JSONEncoder()
+  
+  if let data = try? encoder.encode(user) { // try to encode the data
+    UserDefaults.standard.setValue(data, forKey: "User") // if successful save it to UserDefaults
+  }
+}
+```
+* That `data` constant is a new data type called, perhaps confusingly, `Data`.
+  * It's designed to store any kind of data you can think of, such as strings, images, zip files, and more.
+* When we want to access our data we should use `JSONDecoder` rather than `JSONEncoder`. But the process is basically the same

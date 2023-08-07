@@ -14,6 +14,7 @@
 		4E2E19EE2A807B0300387A3C /* ShowAndHideViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E19ED2A807B0300387A3C /* ShowAndHideViews.swift */; };
 		4E2E19F02A8081F300387A3C /* DeletingItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E19EF2A8081F300387A3C /* DeletingItemsView.swift */; };
 		4E2E19F22A80865000387A3C /* StoringUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E19F12A80865000387A3C /* StoringUserSettings.swift */; };
+		4E2E19F42A808C3800387A3C /* ArchivingSwiftObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E19F32A808C3800387A3C /* ArchivingSwiftObjects.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		4E2E19ED2A807B0300387A3C /* ShowAndHideViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAndHideViews.swift; sourceTree = "<group>"; };
 		4E2E19EF2A8081F300387A3C /* DeletingItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingItemsView.swift; sourceTree = "<group>"; };
 		4E2E19F12A80865000387A3C /* StoringUserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoringUserSettings.swift; sourceTree = "<group>"; };
+		4E2E19F32A808C3800387A3C /* ArchivingSwiftObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivingSwiftObjects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 			isa = PBXGroup;
 			children = (
 				4E2E19F12A80865000387A3C /* StoringUserSettings.swift */,
+				4E2E19F32A808C3800387A3C /* ArchivingSwiftObjects.swift */,
 				4E2E19ED2A807B0300387A3C /* ShowAndHideViews.swift */,
 				4E2E19EF2A8081F300387A3C /* DeletingItemsView.swift */,
 				4E2E19DE2A80626700387A3C /* Day36 */,
@@ -148,6 +151,7 @@
 			files = (
 				4E2E19E22A80626700387A3C /* ContentView.swift in Sources */,
 				4E2E19F22A80865000387A3C /* StoringUserSettings.swift in Sources */,
+				4E2E19F42A808C3800387A3C /* ArchivingSwiftObjects.swift in Sources */,
 				4E2E19E02A80626700387A3C /* Day36App.swift in Sources */,
 				4E2E19EE2A807B0300387A3C /* ShowAndHideViews.swift in Sources */,
 				4E2E19F02A8081F300387A3C /* DeletingItemsView.swift in Sources */,
