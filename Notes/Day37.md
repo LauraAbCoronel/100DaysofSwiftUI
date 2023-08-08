@@ -38,7 +38,27 @@ struct ExpenseItem: Identifiable {
 * So we want our `AddView` to be able to add new expenses to our `expenses` state that we already created. So to pass that value down we added the `@ObservedObject` to our `AddView` to store the property 
 
 ### Making changes permanent with UserDefaults
-* 
+* At this point, our app’s user interface is functional: you’ve seen we can add and delete items, and now we have a sheet showing a user interface to create new expenses. 
+* However, the app is far from working: any data placed into `AddView` is completely ignored, and even if it weren’t ignored then it still wouldn’t be saved for future times the app is run.
+* So we added a save button to our `AddView` to be able to save the value into our expenses. But we still have the issue of when our app restarts all the data goes away
+* So in our Expenses class we added a `didSet` so that everytime the property is set it saves the data in `UserDefaults`.
+  * But this caused an error b/c our `ExpenseItem` struct must have a `Codable` protocol.
+* And to set the default to the `UserDefaults`, we added an `init` that tries to find the data and if so save it to items
 
 ### Final polish
-* 
+* There are two problems with our app:
+  1. Adding an expense doesn’t dismiss `AddView`; it just stays there.
+  2. When you add an expense, you can’t actually see any details about it.
+* To solve our first item we added an `@Environment(\.dismiss)` to our `AddView` then call `dismiss()` after we added the item to our expenses
+* To fix the second we just added more Views like so
+``` swift
+HStack {
+  VStack(alignment: .leading) {
+    Text(item.name)
+      .font(.headline)
+    Text(item.type)
+  }
+  Spacer()
+  Text(item.amount, format: .currency(code: "USD"))
+}
+```
