@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
 		NavigationStack {
 			List {
-				ForEach(expenses.items, id: \.name) { item in
+				ForEach(expenses.items) { item in
 					Text(item.name)
 				}
 				.onDelete(perform: { indexSet in
@@ -23,7 +23,7 @@ struct ContentView: View {
 			.navigationTitle("iExpense")
 			.toolbar {
 				Button {
-					let expense = ExpenseItem(name: "Test", type: "Personal", ammount: 5)
+					let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
 					expenses.items.append(expense)
 				} label: {
 					Image(systemName: "plus")

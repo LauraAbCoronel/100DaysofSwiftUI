@@ -11,7 +11,26 @@
 * We also ended up adding the `.onDelete` modifier to the ForEach so we're able to delete items.
 
 ### Working with Identifiable items in SwiftUI
-* 
+* We currently have an issue with our code. In our `ForEach` we are giving the id of name BUT name can be duplicate and that's not good. ID must be unique
+``` swift
+ForEach(expenses.items, id: \.name) { item in
+    Text(item.name)
+}
+.onDelete(perform: removeItems)
+```
+* This is called a logic error b/c our code runs fine but the logic we passed is wrong
+* We fixed this by adding a property to our `ExpenseItem` struct that creates a unique ID each time. Like this:
+``` swift
+struct ExpenseItem: Identifiable {
+	let id = UUID()
+	let name: String
+	let type: String
+	let amount: Double
+}
+```
+* We also end up adding the `Identifiable` protocol to the struct. 
+  * This is just for performance and the only thing required is a property with the name `id` and the value of a unique ID
+* This also means we can remove the id parameter in our `ForEach` since swift knows this data is `Identifiable` 
 
 ### Sharing an observed object with a new view
 * 
