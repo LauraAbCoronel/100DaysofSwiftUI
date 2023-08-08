@@ -33,7 +33,9 @@ struct ExpenseItem: Identifiable {
 * This also means we can remove the id parameter in our `ForEach` since swift knows this data is `Identifiable` 
 
 ### Sharing an observed object with a new view
-* 
+* We created a new view that will contain our UI for adding new Expenses to our app. The view is pretty simple just two text fields to enter the expense name and amount and a Picker to select the type of expense.
+* We then called the `.sheet` method to show our second view
+* So we want our `AddView` to be able to add new expenses to our `expenses` state that we already created. So to pass that value down we added the `@ObservedObject` to our `AddView` to store the property 
 
 ### Making changes permanent with UserDefaults
 * 
