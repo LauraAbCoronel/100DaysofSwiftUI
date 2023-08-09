@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+var localCurrency: FloatingPointFormatStyle<Double>.Currency {
+	.currency(code: Locale.current.currency?.identifier ?? "USD")
+}
+
 struct ContentView: View {
 	@StateObject var expenses = Expenses()
 	@State private var showingAddExpense = false
@@ -14,20 +18,8 @@ struct ContentView: View {
     var body: some View {
 		NavigationStack {
 			List {
-				ForEach(expenses.items) { item in
-					HStack {
-						VStack(alignment: .leading) {
-							Text(item.name)
-								.font(.headline)
-							Text(item.type)
-						}
-						Spacer()
-						Text(item.amount, format: .currency(code: "USD"))
-					}
-				}
-				.onDelete(perform: { indexSet in
-					removeItems(at: indexSet)
-				})
+				ExpenseSection(title: "Business", expenses: expenses.businessItems, deletItems: removeBusinessItems)
+				ExpenseSection(title: "Personal", expenses: expenses.personalItems, deletItems: removePersonalItems)
 			}
 			.navigationTitle("iExpense")
 			.toolbar {
@@ -43,8 +35,26 @@ struct ContentView: View {
 		}
     }
 	
-	func removeItems(at offset: IndexSet) {
-		expenses.items.remove(atOffsets: offset)
+	func removeItems(at offsets: IndexSet, in inputArray: [ExpenseItem]) {
+		var objectsToDelete = IndexSet()
+		
+		for offset in offsets {
+			let item = inputArray[offset]
+			
+			if let index = expenses.items.firstIndex(of: item) {
+				objectsToDelete.insert(index)
+			}
+		}
+		
+		expenses.items.remove(atOffsets: objectsToDelete)
+	}
+	
+	func removePersonalItems(at offsets: IndexSet) {
+		removeItems(at: offsets, in: expenses.personalItems)
+	}
+	
+	func removeBusinessItems(at offsets: IndexSet) {
+		removeItems(at: offsets, in: expenses.businessItems)
 	}
 }
 
