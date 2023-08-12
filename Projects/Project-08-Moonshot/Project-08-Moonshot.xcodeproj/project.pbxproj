@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E6AC7E72A871B2300E7210B /* MissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6AC7E62A871B2300E7210B /* MissionView.swift */; };
 		4ED149EE2A85C4A2008AEA10 /* Project_08_MoonshotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED149ED2A85C4A2008AEA10 /* Project_08_MoonshotApp.swift */; };
 		4ED149F02A85C4A2008AEA10 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED149EF2A85C4A2008AEA10 /* ContentView.swift */; };
 		4ED149F22A85C4A4008AEA10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ED149F12A85C4A4008AEA10 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E6AC7E62A871B2300E7210B /* MissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionView.swift; sourceTree = "<group>"; };
 		4ED149EA2A85C4A2008AEA10 /* Project-08-Moonshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project-08-Moonshot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED149ED2A85C4A2008AEA10 /* Project_08_MoonshotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_08_MoonshotApp.swift; sourceTree = "<group>"; };
 		4ED149EF2A85C4A2008AEA10 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 			children = (
 				4ED149ED2A85C4A2008AEA10 /* Project_08_MoonshotApp.swift */,
 				4ED149EF2A85C4A2008AEA10 /* ContentView.swift */,
+				4E6AC7E62A871B2300E7210B /* MissionView.swift */,
 				4ED149FF2A85C736008AEA10 /* Astronaut.swift */,
 				4ED14A032A85CCFA008AEA10 /* Mission.swift */,
 				4ED14A012A85C862008AEA10 /* Bundle-Decodable.swift */,
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E6AC7E72A871B2300E7210B /* MissionView.swift in Sources */,
 				4ED14A002A85C736008AEA10 /* Astronaut.swift in Sources */,
 				4ED14A062A85D6CC008AEA10 /* Color-Theme.swift in Sources */,
 				4ED149F02A85C4A2008AEA10 /* ContentView.swift in Sources */,
