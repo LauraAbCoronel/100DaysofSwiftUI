@@ -36,4 +36,8 @@ init(mission: Mission, astronauts: [String: Astronaut]) {
 * We also then linked this view to our `ContentView` so that this view will generate when someone clicks the Apollo mission
 
 ### Finishing up with one last view
-* 
+* The last view we added was the `AstronautView` Where you can see details on each astronaut.
+* This is basically just practice of the previous video.
+* We added a new file. The view only takes in the astronaut constant
+* And displays it on the view.
+* Lastly we connected this view to our `MissionView` So that clicking on an astronaut showed you details of them. 
