@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AstronautListView: View {
 	let crew: [MissionView.CrewMember]
-
 	
     var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
@@ -45,6 +44,6 @@ struct AstronautListView: View {
     }
 }
 
-//#Preview {
-//	AstronautListView(crew: missions[0].crew)
-//}
+#Preview {
+	AstronautListView(crew: [])
+}
